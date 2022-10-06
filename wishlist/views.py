@@ -13,6 +13,7 @@ import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+
 # Create your views here.
 @login_required(login_url='/wishlist/login/')
 def show_wishlist(request):
@@ -23,6 +24,26 @@ def show_wishlist(request):
         'last_login': request.COOKIES['last_login'],
     }
     return render(request, "wishlist.html", context)
+
+def show_wishlist_ajax(request):
+    context = {
+        'nama': 'Wedens Elma Malau',
+        'last_login': request.COOKIES['last_login'],
+    }
+    return render(request, "wishlist_ajax.html", context)
+
+# def create_wishlist(request):
+
+#     if request.method == 'POST':
+#         BarangWishlist.add_to_class({
+#             nama_barang = request.POST.get('nama_barang')
+#             harga_barang = request.POST.get('harga_barang')
+#             deskripsi = request.POST.get('deskripsi')
+#         }
+#         )
+    
+#     context = {}
+#     return render(request, 'login.html', context)
 
 def show_xml(request):
     data = BarangWishlist.objects.all()

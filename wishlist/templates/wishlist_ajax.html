@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-md">
+        <a class="navbar-brand" href="#">Wishlist</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Nama: {{nama}}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'wishlist:logout' %}">Logout</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        Data View
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'wishlist:show_xml' %}">XML</a></li>
+                        <li><a class="dropdown-item" href="{% url 'wishlist:show_wishlist' %}">HTML</a></li>
+                        <li><a class="dropdown-item" href="{% url 'wishlist:show_json' %}">JSON</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<br>
+<div class="position-absolute top-50 start-50 translate-middle mt-1">
+<h5></h5>
+
+<table class="table table-striped table-bordered table-responsive">
+    <thead class="table-light">
+        <tr scope="row">
+        <th>Nama Barang</th>
+        <th>Harga Barang</th>
+        <th>Deskripsi</th>
+        </tr>
+    </thead>
+    {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
+    <tbody>
+        {% for barang in list_barang %}
+            <tr scope="row">
+                <td>{{barang.nama_barang}}</td>
+                <td>{{barang.harga_barang}}</td>
+                <td>{{barang.deskripsi}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h5>Sesi terakhir login: {{ last_login }}</h5>
+
+<br>
+
+<button type="button" class="btn btn-outline-dark position-relative"><a href="{% url 'wishlist:logout' %}">Logout</a></button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+</div>
+{% endblock content %}
